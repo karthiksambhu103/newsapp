@@ -18,12 +18,12 @@ const News = (props) => {
         props.setProgress(10);
         const url = 'https://google.serper.dev/news';
         const apiKey = process.env.REACT_APP_SERPER_API;
-
+    
         if (!apiKey) {
             console.error('API key is missing. Please check your .env file.');
             return;
         }
-
+    
         const options = {
             method: 'POST',
             headers: {
@@ -32,11 +32,11 @@ const News = (props) => {
             },
             body: JSON.stringify({
                 q: props.category,
-                num: props.pageSize, // Number of results per request
+                num: props.pageSize,
                 page: pageNumber
-            }) // Search by category
+            })
         };
-
+    
         setLoading(true);
         try {
             const response = await fetch(url, options);
@@ -44,26 +44,26 @@ const News = (props) => {
             const data = await response.json();
             props.setProgress(70);
             console.log('Fetched News Data:', data);
-
+    
             if (data.news) {
                 setArticles((prevArticles) =>
                     pageNumber === 1 ? data.news : [...prevArticles, ...data.news]
                 );
-
-                // Update totalResults only if it's the first page
+    
                 if (pageNumber === 1) {
-                    setTotalResults(data.news.length * 10); // Approximate max results
+                    setTotalResults(data.news.length * 10);
                 }
-
-                setPage(pageNumber); // Update the page state correctly
+    
+                setPage(pageNumber);
             }
             setLoading(false);
             props.setProgress(100);
         } catch (error) {
             console.error('Error fetching news:', error);
-            setLoading(false); // Ensure loading stops even on error
+            setLoading(false);
         }
     }, [props.category, props.pageSize, props.setProgress]);
+    
 
     useEffect(() => {
         document.title = `${capitalizeFirstLetter(props.category)} - NewsMonkey`;
@@ -85,7 +85,7 @@ const News = (props) => {
             <InfiniteScroll
                 dataLength={articles.length}
                 next={fetchMoreData}
-                hasMore={articles.length < totalResults} // ✅ Corrected condition
+                hasMore={articles.length < totalResults} 
                 loader={<Spinner />}
             >
                 <div className="container">
