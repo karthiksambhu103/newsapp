@@ -62,7 +62,8 @@ const News = (props) => {
             console.error('Error fetching news:', error);
             setLoading(false);
         }
-    }, [props.category, props.pageSize, props.setProgress]);
+    }, [props.category, props.pageSize, props.setProgress]); 
+    
     
 
     useEffect(() => {
