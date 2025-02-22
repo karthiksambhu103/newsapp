@@ -28,7 +28,7 @@ const NewsItem = (props) => {
                     <p className="card-text">{description}</p>
                     <p className="card-text"><small className="text-muted">        By {source} on {date.includes("ago") ? date : new Date(date).toGMTString()}
                     </small></p>
-                    <a rel="noreferrer" href={newsUrl} target="_blank" className="btn btn-sm btn-dark">Read More</a>
+                    <a rel="noopener noreferrer" href={newsUrl} target="_blank" className="btn btn-sm btn-dark">Read More</a>
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@ const News = (props) => {
     };
 
     const fetchNews = useCallback(async (pageNumber = 1) => {
-        props.setProgress(10);
+        // props.setProgress(10);
         const url = 'https://google.serper.dev/news';
         const apiKey = process.env.REACT_APP_SERPER_API;
     
@@ -40,9 +40,9 @@ const News = (props) => {
         setLoading(true);
         try {
             const response = await fetch(url, options);
-            props.setProgress(30);
+            // props.setProgress(30);
             const data = await response.json();
-            props.setProgress(70);
+            // props.setProgress(70);
             console.log('Fetched News Data:', data);
     
             if (data.news) {
@@ -57,12 +57,12 @@ const News = (props) => {
                 setPage(pageNumber);
             }
             setLoading(false);
-            props.setProgress(100);
+            // props.setProgress(100);
         } catch (error) {
             console.error('Error fetching news:', error);
             setLoading(false);
         }
-    }, [props.category, props.pageSize, props.setProgress]); 
+    }, [props.category, props.pageSize]); 
     
     
 
@@ -121,7 +121,7 @@ News.propTypes = {
     country: PropTypes.string,
     pageSize: PropTypes.number,
     category: PropTypes.string,
-    setProgress: PropTypes.func.isRequired
+    // setProgress: PropTypes.func.isRequired
 };
 
 export default News;
